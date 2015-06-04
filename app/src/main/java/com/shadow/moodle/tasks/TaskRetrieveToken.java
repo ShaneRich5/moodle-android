@@ -3,7 +3,7 @@ package com.shadow.moodle.tasks;
 import android.os.AsyncTask;
 
 import com.android.volley.RequestQueue;
-import com.shadow.moodle.callbacks.TokenLoadedListener;
+import com.shadow.moodle.callbacks.CredentialsLoadedListener;
 import com.shadow.moodle.extras.MoodleUtils;
 import com.shadow.moodle.network.VolleySingleton;
 
@@ -11,15 +11,13 @@ import com.shadow.moodle.network.VolleySingleton;
  * Created by Shane on 6/3/2015.
  */
 public class TaskRetrieveToken extends AsyncTask<Void, Void, String> {
-    private TokenLoadedListener mComponent;
-    private VolleySingleton mVolleySingleton;
+    private CredentialsLoadedListener mComponent;
     private RequestQueue requestQueue;
     private String username, password;
 
-    public TaskRetrieveToken(TokenLoadedListener mComponent, String username, String password) {
+    public TaskRetrieveToken(CredentialsLoadedListener mComponent, String username, String password) {
         this.mComponent = mComponent;
-        mVolleySingleton = VolleySingleton.getsInstance();
-        requestQueue = mVolleySingleton.getRequestQueue();
+        requestQueue = VolleySingleton.getsInstance().getRequestQueue();
         this.username = username;
         this.password = password;
     }

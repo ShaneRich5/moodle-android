@@ -1,6 +1,5 @@
 package com.shadow.moodle.activities;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -10,12 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.shadow.moodle.R;
-import com.shadow.moodle.callbacks.TokenLoadedListener;
+import com.shadow.moodle.callbacks.CredentialsLoadedListener;
 import com.shadow.moodle.logger.Logger;
+import com.shadow.moodle.model.User;
 import com.shadow.moodle.tasks.TaskRetrieveToken;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, TokenLoadedListener {
+public class MainActivity extends AppCompatActivity implements
+        View.OnClickListener, CredentialsLoadedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,5 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onTokenLoaded(String token) {
         Logger.toastLong(this, token);
+    }
+
+    @Override
+    public void onUserDetailsLoaded(User user) {
+
     }
 }

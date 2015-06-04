@@ -1,20 +1,25 @@
 package com.shadow.moodle.json;
 
-import com.shadow.moodle.extras.UrlEnpoints;
-
 import static com.shadow.moodle.extras.UrlEnpoints.*;
 import static com.shadow.moodle.extras.UrlEnpoints.Char.*;
+import static com.shadow.moodle.extras.UrlEnpoints.Param.*;
 import static com.shadow.moodle.extras.UrlEnpoints.Query.*;
 
 /**
  * Created by Shane on 6/4/2015.
  */
 public class Endpoint {
-//    http://ourvle.mona.uwi.edu/login/token.php?username=620065739&password=19941206&service=moodle_mobile_app
     public static String getMoodleToken(String username, String password) {
-        return URL_BASE + LOGIN + TOKEN + QUESTION +
-                AMPERSAND + USERNAME + username +
+        return URL_BASE + LOGIN + TOKEN +
+                QUESTION + USERNAME + username +
                 AMPERSAND + PASSWORD + password +
                 AMPERSAND + SERVICE;
+    }
+
+    public static String getUserDetails(String token) {
+        return URL_BASE + WEBSERVICE + REST + SERVER +
+                QUESTION + WS_TOKEN + token +
+                AMPERSAND + WS_FUNCTION + CORE_WEBSERVICE_GET_SITE_INFO +
+                AMPERSAND + MOODLE_WS_REST_FORMAT;
     }
 }

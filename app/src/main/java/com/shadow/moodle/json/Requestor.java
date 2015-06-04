@@ -16,7 +16,7 @@ import java.util.concurrent.TimeoutException;
  * Created by Shane on 6/3/2015.
  */
 public class Requestor {
-    public static JSONObject requestTokenJSON(RequestQueue requestQueue, String url) {
+    public static JSONObject getRequestJSON(RequestQueue requestQueue, String url) {
         RequestFuture<JSONObject> requestFuture = RequestFuture.newFuture();
         JSONObject response = null;
 
