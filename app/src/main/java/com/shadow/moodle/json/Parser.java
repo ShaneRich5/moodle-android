@@ -1,10 +1,13 @@
 package com.shadow.moodle.json;
 
 import com.shadow.moodle.extras.Keys;
+import com.shadow.moodle.model.Course;
 import com.shadow.moodle.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Shane on 6/4/2015.
@@ -24,6 +27,10 @@ public class Parser {
     }
 
     public static User parseUserJSON(JSONObject response) {
+        return null;
+    }
+
+    public static ArrayList<Course> parseCoursesListJSON(JSONObject response) {
         return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.shadow.moodle.sessions;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,7 @@ public class SessionManager {
     public static final String KEY_LAST_NAME = "lastName";
     public static final String KEY_USER_ID = "user_id";
 
+    @SuppressLint("CommitPrefEdits")
     public SessionManager(Context context) {
         this.context = context;
         preferences = this.context

@@ -22,4 +22,12 @@ public class Endpoint {
                 AMPERSAND + WS_FUNCTION + CORE_WEBSERVICE_GET_SITE_INFO +
                 AMPERSAND + MOODLE_WS_REST_FORMAT;
     }
+
+    public static String getCoursesList(String token, int userId) {
+        return URL_BASE + WEBSERVICE + REST + SERVER +
+                QUESTION + WS_TOKEN + token +
+                AMPERSAND + WS_TOKEN + CORE_ENROL_GET_USERS_COURSES +
+                AMPERSAND + USER_ID + userId +
+                AMPERSAND + MOODLE_WS_REST_FORMAT;
+    }
 }

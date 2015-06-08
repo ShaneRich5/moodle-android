@@ -38,6 +38,11 @@ public class LoginActivity extends BaseActivity implements CredentialsLoadedList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // skips this activity if the user has already logged in
+        if (checkLogin())
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
         setContentView(R.layout.activity_login);
 
         mUsernameView = (EditText) findViewById(R.id.username);
@@ -166,19 +171,13 @@ public class LoginActivity extends BaseActivity implements CredentialsLoadedList
     public void onTokenLoaded(String token) {
         mProfileTask = new TaskLoadUserDetails(this, token);
         mProfileTask.execute((Void) null);
-
-        Logger.toastLong(this, token);
         createSession(username, token);
-
-        Log.w("AsnycTask", "Token = " + token);
-        Log.w("SessionManager", "Token = " + getSessionInfo().get(SessionManager.KEY_TOKEN));
     }
 
     @Override
     public void onUserDetailsLoaded(User user) {
         saveUserId(user.getId());
-        Log.w("LoginActivity", getSessionInfo().toString());
-        Log.w("SessionManager", "USER ID = " + getSessionInfo().get(SessionManager.KEY_USER_ID));
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 }
 

@@ -1,5 +1,6 @@
 package com.shadow.moodle.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -39,7 +40,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         session.addUserId(id);
     }
 
-    public HashMap<String, String> getSessionInfo(){
+    protected HashMap<String, String> getSessionInfo(){
         return session.getUserDetails();
+    }
+
+    protected boolean checkLogin() {
+        return session.isLoggedIn();
+    }
+
+    protected void openLoginScreen() {
+        if (!checkLogin()) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            this.startActivity(intent);
+        }
     }
 }

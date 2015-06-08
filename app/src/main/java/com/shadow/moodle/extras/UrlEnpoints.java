@@ -18,6 +18,7 @@ public class UrlEnpoints {
         public static final String MOODLE_WS_REST_FORMAT = "moodlewsrestformat=json";
         public static final String USERNAME = "username=";
         public static final String PASSWORD = "password=";
+        public static final String USER_ID = "userid=";
         public static final String WS_TOKEN = "wstoken=";
         public static final String WS_FUNCTION = "wsfunction=";
     }
@@ -29,5 +30,6 @@ public class UrlEnpoints {
 
     public class Param {
         public static final String CORE_WEBSERVICE_GET_SITE_INFO = "core_webservice_get_site_info";
+        public static final String CORE_ENROL_GET_USERS_COURSES = "core_enrol_get_users_courses";
     }
 }
