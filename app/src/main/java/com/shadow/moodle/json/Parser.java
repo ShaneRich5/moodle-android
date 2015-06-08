@@ -1,6 +1,7 @@
 package com.shadow.moodle.json;
 
 import com.shadow.moodle.extras.Keys;
+import com.shadow.moodle.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +20,10 @@ public class Parser {
                 }
             }
         }
+        return null;
+    }
+
+    public static User parseUserJSON(JSONObject response) {
         return null;
     }
 }

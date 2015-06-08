@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.shadow.moodle.R;
 import com.shadow.moodle.callbacks.CredentialsLoadedListener;
+import com.shadow.moodle.json.Endpoint;
 import com.shadow.moodle.logger.Logger;
 import com.shadow.moodle.model.User;
 import com.shadow.moodle.sessions.SessionManager;
@@ -31,7 +33,6 @@ public class LoginActivity extends BaseActivity implements CredentialsLoadedList
     private EditText mUsernameView, mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-
     private String username;
 
     @Override
@@ -165,15 +166,19 @@ public class LoginActivity extends BaseActivity implements CredentialsLoadedList
     public void onTokenLoaded(String token) {
         mProfileTask = new TaskLoadUserDetails(this, token);
         mProfileTask.execute((Void) null);
+
         Logger.toastLong(this, token);
         createSession(username, token);
+
+        Log.w("AsnycTask", "Token = " + token);
+        Log.w("SessionManager", "Token = " + getSessionInfo().get(SessionManager.KEY_TOKEN));
     }
 
     @Override
     public void onUserDetailsLoaded(User user) {
-        addUserDetailsToSession(user);
-        Logger.toastShort(this, session.getUserDetails().get(SessionManager.KEY_ID));
-        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        saveUserId(user.getId());
+        Log.w("LoginActivity", getSessionInfo().toString());
+        Log.w("SessionManager", "USER ID = " + getSessionInfo().get(SessionManager.KEY_USER_ID));
     }
 }
 

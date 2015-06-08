@@ -1,6 +1,7 @@
 package com.shadow.moodle.tasks;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.shadow.moodle.callbacks.CredentialsLoadedListener;
@@ -31,5 +32,6 @@ public class TaskRetrieveToken extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String token) {
         if (mComponent != null)
             mComponent.onTokenLoaded(token);
+        Log.w("TaskRetrieveToken", token + " ");
     }
 }

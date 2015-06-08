@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.shadow.moodle.activities.LoginActivity;
+import com.shadow.moodle.application.MoodleApplication;
 import com.shadow.moodle.model.User;
 
 import java.util.HashMap;
@@ -27,26 +29,36 @@ public class SessionManager {
     public static final String KEY_TOKEN = "token";
     public static final String KEY_FIRST_NAME = "firstName";
     public static final String KEY_LAST_NAME = "lastName";
-    public static final String KEY_ID = "id";
+    public static final String KEY_USER_ID = "user_id";
 
     public SessionManager(Context context) {
         this.context = context;
-        preferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        preferences = this.context
+                .getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = preferences.edit();
+    }
+
+    public SharedPreferences getPreferences() {
+        return preferences;
     }
 
     public void createLoginSession(String username, String token){
         editor.putBoolean(KEY_IS_LOGGED_IN, true);
         editor.putString(KEY_USERNAME, username);
         editor.putString(KEY_TOKEN, token);
-        editor.commit();
+        editor.apply();
+    }
+
+    public void addUserId(int id) {
+        editor.putInt(KEY_USER_ID, id);
+        editor.apply();
     }
 
     public void addUserDetails(User user) {
         editor.putString(KEY_FIRST_NAME, user.getFirstName());
         editor.putString(KEY_LAST_NAME, user.getLastName());
-        editor.putLong(KEY_ID, user.getId());
-        editor.commit();
+        editor.putLong(KEY_USER_ID, user.getId());
+        editor.apply();
     }
 
     public boolean isLoggedIn() {
@@ -67,11 +79,12 @@ public class SessionManager {
         HashMap<String, String> userDetails = new HashMap<>();
         userDetails.put(KEY_USERNAME, preferences.getString(KEY_USERNAME, null));
         userDetails.put(KEY_TOKEN, preferences.getString(KEY_TOKEN, null));
+        userDetails.put(KEY_USER_ID, String.valueOf(preferences.getInt(KEY_USER_ID, 0)));
         return userDetails;
     }
 
     public void logoutUser() {
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 }

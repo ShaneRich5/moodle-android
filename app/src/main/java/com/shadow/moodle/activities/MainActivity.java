@@ -9,14 +9,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.shadow.moodle.R;
-import com.shadow.moodle.callbacks.CredentialsLoadedListener;
-import com.shadow.moodle.logger.Logger;
-import com.shadow.moodle.model.User;
 import com.shadow.moodle.tasks.TaskRetrieveToken;
 
 
 public class MainActivity extends AppCompatActivity implements
-        View.OnClickListener, CredentialsLoadedListener {
+        View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +53,7 @@ public class MainActivity extends AppCompatActivity implements
                 String username = ((TextView) findViewById(R.id.username)).getText().toString();
                 String password = ((TextView) findViewById(R.id.password)).getText().toString();
 
-                new TaskRetrieveToken(this, username, password).execute();
-
                 break;
         }
-    }
-
-    @Override
-    public void onTokenLoaded(String token) {
-        Logger.toastLong(this, token);
-    }
-
-    @Override
-    public void onUserDetailsLoaded(User user) {
-
     }
 }
